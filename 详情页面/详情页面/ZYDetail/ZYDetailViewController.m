@@ -90,7 +90,19 @@
     for (ZYNewsDetailling *img in self.newsDetail.img) {
         NSMutableString *imgHtml = [NSMutableString string];
         [imgHtml appendString:@"<div class=\"img-parent\">"];
-        [imgHtml appendFormat:@"<img src=\"%@\">",img.src];
+        
+        //拿到图片的尺寸
+        NSArray *pixel = [img.pixel componentsSeparatedByString:@"*"];
+        int width = [[pixel firstObject]intValue];
+        int height = [[pixel lastObject]intValue];
+        int maxWidth = [UIScreen mainScreen].bounds.size.width *0.8;
+        
+        //h / w = H/ W
+        int destHeight = height/ width * maxWidth;
+        
+        
+        
+        [imgHtml appendFormat:@"<img width=\"%d\" height =\"%d\"  src=\"%@\">",maxWidth, destHeight,img.src];
         
         [imgHtml appendString:@"</div>"];
         
