@@ -11,7 +11,9 @@
 #import "MJExtension.h"
 #import "ZYHTTPManager.h"
 //MARK:   不懂
-#import "UIImageView+WebCache.h"  ?????????????????
+//#import "UIImageView+WebCache.h"  //?????????????????
+#import "UIImageView+WebCache.h"
+#import "ZYDetailViewController.h"
 @interface ZYHeadlineViewController ()
 ///
 @property(nonatomic, strong)NSArray *headlines;
@@ -32,7 +34,7 @@
         self.headlines = [ZYHeadline objectArrayWithKeyValuesArray:array];
         NSLog(@"%@", array);
         
-//        [responseObject writeToFile:@"/Users/apple/Desktop/look.plist" atomically:YES];
+//        [responseObject writeToFile:@"/Users/apple/Desktop/headline.plist" atomically:YES];
         
         ///刷新表格
         [self.tableView reloadData];
@@ -42,6 +44,17 @@
     
 
 }
+
+///准备跳转时候的方法  - 给详情控制器传值
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSInteger row = self.tableView.indexPathForSelectedRow.row;
+    //获得目标控制器
+    ZYDetailViewController *dv = segue.destinationViewController;
+    dv.headline = self.headlines[row];
+}
+
+
 
 
 #pragma mark - 数据源方法

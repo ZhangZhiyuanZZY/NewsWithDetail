@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18E4BE991BFEAC520031F97B /* ZYDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E4BE981BFEAC520031F97B /* ZYDetailViewController.m */; };
+		18E4BE9C1BFEF0BC0031F97B /* ZYNewsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E4BE9B1BFEF0BC0031F97B /* ZYNewsDetail.m */; };
+		18E4BE9F1BFF45320031F97B /* ZYNewsDetailling.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E4BE9E1BFF45320031F97B /* ZYNewsDetailling.m */; };
+		18E4BEA11BFF6FDE0031F97B /* ZYNewsDetail.css in Resources */ = {isa = PBXBuildFile; fileRef = 18E4BEA01BFF6FDE0031F97B /* ZYNewsDetail.css */; };
 		18E772641BFE1E9B0097FDF3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E772631BFE1E9B0097FDF3 /* main.m */; };
 		18E772671BFE1E9B0097FDF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E772661BFE1E9B0097FDF3 /* AppDelegate.m */; };
 		18E7726D1BFE1E9B0097FDF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E7726B1BFE1E9B0097FDF3 /* Main.storyboard */; };
@@ -50,6 +54,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18E4BE971BFEAC520031F97B /* ZYDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYDetailViewController.h; sourceTree = "<group>"; };
+		18E4BE981BFEAC520031F97B /* ZYDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYDetailViewController.m; sourceTree = "<group>"; };
+		18E4BE9A1BFEF0BC0031F97B /* ZYNewsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNewsDetail.h; sourceTree = "<group>"; };
+		18E4BE9B1BFEF0BC0031F97B /* ZYNewsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNewsDetail.m; sourceTree = "<group>"; };
+		18E4BE9D1BFF45320031F97B /* ZYNewsDetailling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNewsDetailling.h; sourceTree = "<group>"; };
+		18E4BE9E1BFF45320031F97B /* ZYNewsDetailling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNewsDetailling.m; sourceTree = "<group>"; };
+		18E4BEA01BFF6FDE0031F97B /* ZYNewsDetail.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = ZYNewsDetail.css; sourceTree = "<group>"; };
 		18E7725F1BFE1E9B0097FDF3 /* 详情页面.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "详情页面.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E772631BFE1E9B0097FDF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18E772651BFE1E9B0097FDF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -201,6 +212,13 @@
 		18E7727A1BFE219E0097FDF3 /* ZYDetail */ = {
 			isa = PBXGroup;
 			children = (
+				18E4BE971BFEAC520031F97B /* ZYDetailViewController.h */,
+				18E4BE981BFEAC520031F97B /* ZYDetailViewController.m */,
+				18E4BEA01BFF6FDE0031F97B /* ZYNewsDetail.css */,
+				18E4BE9A1BFEF0BC0031F97B /* ZYNewsDetail.h */,
+				18E4BE9B1BFEF0BC0031F97B /* ZYNewsDetail.m */,
+				18E4BE9D1BFF45320031F97B /* ZYNewsDetailling.h */,
+				18E4BE9E1BFF45320031F97B /* ZYNewsDetailling.m */,
 			);
 			path = ZYDetail;
 			sourceTree = "<group>";
@@ -366,6 +384,7 @@
 			files = (
 				18E772721BFE1E9B0097FDF3 /* LaunchScreen.storyboard in Resources */,
 				18E7726F1BFE1E9B0097FDF3 /* Assets.xcassets in Resources */,
+				18E4BEA11BFF6FDE0031F97B /* ZYNewsDetail.css in Resources */,
 				18E7726D1BFE1E9B0097FDF3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +411,7 @@
 				18E772671BFE1E9B0097FDF3 /* AppDelegate.m in Sources */,
 				18E772C91BFE24D80097FDF3 /* NSObject+MJIvar.m in Sources */,
 				18E7727D1BFE21CA0097FDF3 /* ZYHeadlineViewController.m in Sources */,
+				18E4BE9C1BFEF0BC0031F97B /* ZYNewsDetail.m in Sources */,
 				18E772B01BFE24CE0097FDF3 /* UIImage+WebP.m in Sources */,
 				18E772CA1BFE24D80097FDF3 /* NSObject+MJKeyValue.m in Sources */,
 				18E772B21BFE24CE0097FDF3 /* UIImageView+WebCache.m in Sources */,
@@ -401,6 +421,7 @@
 				18E772E61BFE24E60097FDF3 /* AFURLResponseSerialization.m in Sources */,
 				18E772AD1BFE24CE0097FDF3 /* UIButton+WebCache.m in Sources */,
 				18E772A41BFE24CE0097FDF3 /* MKAnnotationView+WebCache.m in Sources */,
+				18E4BE991BFEAC520031F97B /* ZYDetailViewController.m in Sources */,
 				18E772DF1BFE24E60097FDF3 /* AFHTTPRequestOperation.m in Sources */,
 				18E772E41BFE24E60097FDF3 /* AFURLConnectionOperation.m in Sources */,
 				18E772E01BFE24E60097FDF3 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -409,6 +430,7 @@
 				18E772641BFE1E9B0097FDF3 /* main.m in Sources */,
 				18E772AB1BFE24CE0097FDF3 /* SDWebImageManager.m in Sources */,
 				18E772A81BFE24CE0097FDF3 /* SDWebImageDecoder.m in Sources */,
+				18E4BE9F1BFF45320031F97B /* ZYNewsDetailling.m in Sources */,
 				18E772E51BFE24E60097FDF3 /* AFURLRequestSerialization.m in Sources */,
 				18E772E31BFE24E60097FDF3 /* AFSecurityPolicy.m in Sources */,
 				18E772E11BFE24E60097FDF3 /* AFHTTPSessionManager.m in Sources */,

@@ -1,0 +1,34 @@
+/*
+ 抽取css代码
+*/
+
+.title {
+    text.align : center;
+    font-size : 25px;
+    color : back;
+    font-weight : bold;
+}
+
+
+.time {
+    text-align : center;
+    text-align : 15px;
+    color : gray;
+    margin-bottom : 10px;
+    margin-top : 5px;
+}
+
+
+
+
+/*
+ 图片的格式, 大于100则让图片等于100*100
+ */
+.img-parent {
+    text-align : center;
+}
+
+.img-parent > img {
+    weight : 100px;
+    height : 100px;
+}
