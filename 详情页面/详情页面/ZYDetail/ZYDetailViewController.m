@@ -12,7 +12,8 @@
 #import "MJExtension.h"
 #import "ZYNewsDetailling.h"
 #import "ZYHeadline.h"
-@interface ZYDetailViewController ()
+#import "UIImageView+WebCache.h"
+@interface ZYDetailViewController ()<UIWebViewDelegate>
 ///网页
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
@@ -29,6 +30,7 @@
     
     ///
     self.title = @"新闻详情";
+    self.webView.delegate = self;
     
     ///这个属性控制是不是自动适配scrollView 的内边距
 //    self.automaticallyAdjustsScrollViewInsets = NO;
@@ -71,6 +73,7 @@
     
     [html appendString:@"<html>"];
     
+    ///这里只是加载网页, 并不是发送请求
     [self.webView loadHTMLString:html baseURL:nil];
 }
 
@@ -101,8 +104,12 @@
         int destHeight = height/ width * maxWidth;
         
         
-        
-        [imgHtml appendFormat:@"<img width=\"%d\" height =\"%d\"  src=\"%@\">",maxWidth, destHeight,img.src];
+        ///onload是页面加载完毕才会执行, 防止用户在网页还没有加载好的时候, 就去点击
+        NSString *onload = @"this.onclick = function() { "
+        "window.location.href = 'zy://?src='+ this.src"
+        "};";
+    
+        [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%d\" height =\"%d\"  src=\"%@\">", onload, maxWidth, destHeight,img.src];
         
         [imgHtml appendString:@"</div>"];
         
@@ -113,6 +120,65 @@
     }
     return body;
 }
+
+// 方法 & src
+// oc  & frist  last
+///保存图片到手机相册
+//imgSrc图片路径
+- (void)saveImageToAlbum:(NSString *)imgSrc
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"是否保存到相册" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    //action代表按钮对象
+    /*Apply a style that indicates the action might change or delete data.
+     Available in iOS 8.0 and later.
+     */
+    [alert addAction:[UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//        //保存到相册
+//        //方法一:使用sdw网上下载
+//        [[SDWebImageManager sharedManager]downloadImageWithURL:[NSURL URLWithString:imgSrc] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//        }];
+        //方法二:从web缓存中加载
+        NSURLCache *cache = [NSURLCache sharedURLCache];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imgSrc]];
+        NSCachedURLResponse *response = [cache cachedResponseForRequest:request];
+        NSData *data = response.data;
+        UIImage *imageFromCache = [UIImage imageWithData:data];
+        UIImageWriteToSavedPhotosAlbum(imageFromCache, nil, nil, nil);
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    //弹出提示框
+    [self presentViewController:alert animated:YES completion:nil];
+    
+ }
+
+
+#pragma mark - webviewdelegate
+//这里只是要, 拦截下请求去执行保存图片的代码, 而不是真的要去发送请求, 所以判断url的值, 什么时候url有值, 当我们点击图片的时候, 才有值,
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *url = request.URL.absoluteString;
+    
+    
+    // HM:http://www.baidu.com
+    // rnage=  href= "zhangzhi  "
+    
+    NSRange range = [url rangeOfString:(@"zy://?src=")];
+    if (range.length > 0) {
+        NSUInteger num = range.location + range.length;
+        NSString *imgSrc = [url substringFromIndex:num];//substringFromIndex参数必须是NSUInteger
+        
+        //保存到相册
+        [self saveImageToAlbum:imgSrc];
+        return NO;
+    }
+    
+    return YES;
+}
+
 
 
 @end
