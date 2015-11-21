@@ -106,7 +106,7 @@
         
         ///onload是页面加载完毕才会执行, 防止用户在网页还没有加载好的时候, 就去点击
         NSString *onload = @"this.onclick = function() { "
-        "window.location.href = 'zy://?src='+ this.src"
+        "window.location.href = 'zy:saveImageToAlbum:&' + this.src"
         "};";
     
         [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%d\" height =\"%d\"  src=\"%@\">", onload, maxWidth, destHeight,img.src];
@@ -161,22 +161,36 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = request.URL.absoluteString;
-    
-    
-    // HM:http://www.baidu.com
-    // rnage=  href= "zhangzhi  "
-    
-    NSRange range = [url rangeOfString:(@"zy://?src=")];
+    NSRange range = [url rangeOfString:@"zy:"];
     if (range.length > 0) {
-        NSUInteger num = range.location + range.length;
-        NSString *imgSrc = [url substringFromIndex:num];//substringFromIndex参数必须是NSUInteger
+        NSUInteger index = range.location + range.length;
+        NSString *string = [url substringFromIndex:index];
+        NSArray *array = [string componentsSeparatedByString:@"&"];
+        NSString *mehodName = array.firstObject;
         
-        //保存到相册
-        [self saveImageToAlbum:imgSrc];
+        //参数是图片路径可能是nil nil的话, 数组元素只有一个, 先判断数组中是不是有两个元素
+        NSString *param = nil;
+        if (array.count > 1) {
+            param = array.lastObject;
+        }
+        
+       
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        //把字符串, 转化成selector
+        SEL methodSel = NSSelectorFromString(mehodName);
+//        if ([self respondsToSelector:methodSel]) {
+//            [self performSelector:methodSel withObject:param];
+//
+//        }
+        [self performSelector:methodSel withObject:param];
+
+#pragma clang diagnostic pop
+        
         return NO;
     }
     
-    return YES;
+        return YES;
 }
 
 
